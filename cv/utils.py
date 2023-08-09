@@ -1,6 +1,7 @@
 import json
 import os
 
+from cv.exceptions import CVFileNotFoundError, CVInvalidJSONError
 from cv.settings import CV_DATA_FILEPATH
 
 
@@ -10,10 +11,13 @@ def read_cv_data_from_file(filename: str) -> dict:
     """
 
     if not os.path.exists(filename):
-        raise ValueError(f"Invalid file path provided: {filename}")
+        raise CVFileNotFoundError(filename)
 
     with open(filename) as file:
-        data = json.load(file)
+        try:
+            data = json.load(file)
+        except json.JSONDecodeError as e:
+            raise CVInvalidJSONError(filename, e)
 
     return data
 
@@ -28,7 +32,4 @@ def get_cv_data(section: str | None = None) -> dict | str:
     if not section:
         return data
 
-    if section not in data:
-        return {"error": f"No data found for section: {section}"}
-
-    return data[section]
+    return data.get(section, {"error": f"No data found for section: {section}"})
