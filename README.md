@@ -21,7 +21,7 @@ This project provides an API service for querying CV data.
 1. Clone the repository:
 
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/mr-grj/cegeka_assignment.git
     cd cegeka_assignment
     ```
 
@@ -68,7 +68,7 @@ GET /api/education/
 
 The CV API service also provides interactive documentation using Swagger. Once 
 the service is running, you can access the Swagger UI by navigating to `/api/` 
-in your web browser. This interface allows you to explore the API's 
+in your web browser. This interface allows you to explore the APIs' 
 capabilities, see endpoint descriptions, and even try out API calls directly 
 from the browser.
 
